@@ -1,0 +1,52 @@
+.slides {
+    overflow: hidden; margin: 0; padding: 0; list-style-type: none;
+    li {float: left; margin-bottom: 10px; margin-right: 10/278*100%; width: 134/278*100%;}
+
+
+    li:nth-child(odd) { clear: left }
+    li:nth-child(even) { margin-right: 0; }
+
+
+    li:last-child {margin-right: 0}
+    @include respond-to(phone-landscape) {
+        li { margin-right: 10/440*100%; width: 215/440*100%; }
+    }
+    @include respond-to(smalltablet) {
+        li { margin-right: 10/540*100%; width: 265/540*100%; }
+    }
+    @include respond-to(tablet-portrait) {
+        li { margin-right: 10/710*100%; width: 350/710*100%; }
+    }
+    //@include respond-to(desktop) {
+    @include respond-wrapper-fallback(desktop, lt-ie9) {
+        li { margin-right: 20/678*100%; width: 212/678*100%; }
+
+        li:nth-child(odd) { clear: none }
+        li:nth-child(even) { margin-right: 20/678*100%; }
+        li:nth-child(3n) { margin-right: 0 }
+        li:nth-child(3n-5) { clear: left }
+
+    }
+    @include respond-to(widescreen) {
+        li { width: 217px/941px*100%; margin-right: 24px/941px*100%; }
+        li:nth-child(even) { margin-right: 24px/941px*100%; }
+        li:nth-child(3n) { margin-right: 24px/941px*100%; }
+        li:nth-child(4n+4) { margin-right: 0; clear: none }
+        li:nth-child(3n-5) { clear: none }
+        li:nth-child(5n-5) { clear: left }
+    }
+}
+
+    .responsive-sites {
+        margin:0; padding: 0; list-style-type: none; overflow: hidden;
+        li { float:left; width: 100%; margin-bottom: $baseLineHeight;
+
+        }
+        @include respond-wrapper-fallback(tablet-portrait, lt-ie9) {
+            li { width: 26%; margin-right: 3%;
+                &:first-child { width: 20% }
+                &:last-child { width: 48%; margin-right: 0 }
+            }
+        }
+
+    }

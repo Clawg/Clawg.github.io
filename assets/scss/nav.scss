@@ -1,0 +1,71 @@
+// *****************************************************************************************
+// Nav
+// *****************************************************************************************
+
+
+        .nav {
+           @extend %full-wrapper;
+
+            ul { background-color: lighten($mainColor, 20%); border-top:solid 1px $gray; list-style-type: none; margin: 0; padding: 0}
+            li { padding-left:0; color: #8EBECF; /*font-family:orbitron, Georgia, serif;*/ position:relative; text-transform:uppercase; font-weight:bold; text-transform:uppercase; font-weight:bold; border-bottom:solid 1px $gray}
+            a { display:block; text-align: center;  text-decoration:none; line-height: 50px; color: $grayDark}
+            a:hover { text-decoration: underline; background-color: lighten($mainColor, 10%); }
+
+            //@include respond-to(tablet-portrait) {
+            @include respond-wrapper-fallback(tablet-portrait, lt-ie9) {
+                    @extend %full-wrapper;
+                    background-color: lighten($mainColor, 20%); border-bottom:solid 1px $gray; border-top: none; left: 0; position: fixed; top: 0; width: 100%;
+
+                    ul {
+                        border: none;
+                        background-color: transparent;
+                        margin: 0 auto;
+                        padding:0;
+                        width: 100%;
+                        //max-width: tablet-portrait;
+                    }
+                    //li { margin: 0; padding: 0 }
+
+                    // width: 100%; position: fixed; top:0; left: 0;  border-bottom:solid 1px $gray; margin: 0;
+                    // ul { width:100%; background-color: transparent; border:solid 1px red}
+                    li { border: none; display: inline-block; margin: 0; padding:0;}
+                    a {padding: 0 1em; line-height: 3em}
+            }
+
+            //@include respond-to(desktop) {
+            @include respond-wrapper-fallback(desktop, lt-ie9) {
+                ul {
+                    max-width: $widescreen;
+                }
+            }
+
+
+
+    }
+// Required as the styling is different than respond-wrapper-fallback
+.lt-ie9 {
+    .nav ul { max-width: $desktop }
+}
+// .lt-ie9 {
+//     .nav{
+//         @extend %full-wrapper;
+//         background-color: lighten($mainColor, 20%); border-bottom:solid 1px $gray; border-top: none; left: 0; position: fixed; top: 0; width: 100%;
+
+//         ul {
+//             border: none;
+//             background-color: transparent;
+//             margin: 0 auto;
+//             padding:0;
+//             width: 100%;
+//             //max-width: tablet-portrait;
+//         }
+
+//         li { border: none; display: inline-block; margin: 0; padding:0;}
+//         a {padding: 0 1em; line-height: 3em}
+
+//         ul {
+//             max-width: $widescreen;
+//         }
+
+//     }
+// }

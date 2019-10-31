@@ -1,0 +1,75 @@
+// *****************************************************************************************
+// Lists
+// *****************************************************************************************
+
+.list-vertical { list-style-type: none; margin: 0; padding: 0;
+    li { margin-bottom: $baseLineHeight; }
+    li:last-child { margin-bottom: 0; }
+}
+
+
+// *****************************************************************************************
+// Blog list itmes
+// *****************************************************************************************
+
+    %list {
+       list-style-type: none; margin: 0 0 $baseLineHeight*2 0;
+        padding-bottom: $baseLineHeight;
+        li {
+            border-bottom: solid 1px #DFDFDF; /*margin: 0 10/300*100%;*/
+            &:nth-child(even) { background-color: lighten($mainColor, 20%); }
+            &:last-child { border-bottom:none; margin-bottom: 0 }
+            //&:first-child a { padding-top: 0 }
+
+        }
+
+        a {
+            display: block;
+            margin: 0;
+            padding: $baseLineHeight 10px/($phone - 10px) * 100%;
+            &:hover { text-decoration:none; }
+            & * {color: $bodycolor;}
+
+        }
+    }
+
+    .standard-list {
+        @extend %list;
+        padding:0; margin: 0;
+    }
+
+   .blog-list { @include main-widget; @extend %list;
+
+
+        p { margin-bottom: 0; }
+
+        @include respond-to(phone-landscape) {
+           a { padding: $baseLineHeight 10px/($phone-landscape - 10px) * 100%; }
+        }
+        @include respond-to(smalltablet) {
+            a { padding: $baseLineHeight 10px/($smalltablet - 10px) * 100%; }
+        }
+        @include respond-to(tablet-portrait) {
+            a { padding: $baseLineHeight 10px/($tablet-portrait - 10px) * 100%; }
+        }
+        //@include respond-to(desktop) {
+        @include respond-wrapper-fallback(desktop, lt-ie9) {
+            a { padding: $baseLineHeight 10px/($desktop - 10px) * 100%; }
+        }
+        @include respond-to(widescreen) {
+            a { padding: $baseLineHeight 10px/($widescreen - 10px) * 100%; }
+        }
+
+
+
+    }
+
+    .blog-list-title { margin: 0; padding: 0; }
+
+
+// .lt-ie9 {
+//     .blog-list { @include main-widget; @extend %list;
+//         a { padding: $baseLineHeight 10px/($desktop - 10px) * 100%; }
+//     }
+
+// }

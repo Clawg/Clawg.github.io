@@ -1,0 +1,78 @@
+// *****************************************************************************************
+// Header
+// *****************************************************************************************
+
+header {padding: $baseLineHeight 10px/$phone * 100%;
+
+   hgroup { margin: 0; padding: 0; }
+
+   h1 { color: #8EBECF; font-family: "orbitron", Verdana, serif; font-weight:normal; letter-spacing: 0.2em; opacity: .7; padding:0; margin:0; text-shadow: 2px 2px 2px #666;
+        #b,
+        #l2,
+        #o,
+        #g2 { display:none; }
+    }
+
+    h2 { display:none; }
+
+
+    @include respond-to(phone-landscape) {
+        padding-left: 10px/$phone-landscape * 100%;
+        padding-right: 10px/$phone-landscape * 100%;
+    }
+    @include respond-to(smalltablet) {
+        padding-left: 10px/$smalltablet * 100%;
+        padding-right: 10px/$smalltablet * 100%;
+    }
+    //@include respond-to(tablet-portrait) {
+    @include respond-wrapper-fallback(tablet-portrait, lt-ie9) {
+        padding-left: 10px/$tablet-portrait * 100%;
+        padding-right: 10px/$tablet-portrait * 100%;
+    }
+    @include respond-to(desktop) {
+    //@include respond-wrapper-fallback(lt-ie9) {
+        height: 100px;
+        padding-left: 0 10px/$desktop * 100%;
+        padding-right: 0 10px/$desktop * 100%;
+        h1 {
+            span {position: absolute}
+            #c {  left: 35px;  top: 60px; -webkit-transform: rotate(-50deg); -moz-transform: rotate(-50deg); }
+            #l {  left: 85px;  top: 25px;  -webkit-transform: rotate(-35deg); -moz-transform: rotate(-35deg); }
+            #a {  left: 146px; top: 10px;  -webkit-transform: rotate(10deg);  -moz-transform: rotate(10deg); }
+            #w {  left: 200px; top: 27px;  -webkit-transform: rotate(25deg);  -moz-transform: rotate(25deg);  }
+            #g {  left: 256px; top: 58px; -webkit-transform: rotate(55deg);  -moz-transform: rotate(55deg); }
+        }
+    }
+    @include respond-to(widescreen) {
+        height: 150px;
+        padding-left: 0 10px/$widescreen * 100%;
+        padding-right: 0 10px/$widescreen * 100%;
+        h1{
+            #c {  top: 105px; }
+            #l {  left: 95px;  top: 65px; }
+            #a {  left: 160px; top: 50px; }
+            #w {  left: 225px; top: 60px; }
+            #g {  left: 293px; top: 100px; }
+
+            #b {  left: 436px; top: 55px;  -webkit-transform: rotate(35deg);  -moz-transform: rotate(35deg); }
+            #l2 { left: 510px; top: 80px;  -webkit-transform: rotate(0deg);   -moz-transform: rotate(0deg); }
+            #o {  left: 570px; top: 80px;  -webkit-transform: rotate(-20deg); -moz-transform: rotate(-20deg); }
+            #g2 { left: 635px; top: 45px;  -webkit-transform: rotate(-55deg); -moz-transform: rotate(-55deg); }
+
+            #b,
+            #l2,
+            #o,
+            #g2 {display:block}
+        }
+    }
+
+
+
+}
+
+// .lt-ie9 {
+//     header {
+//             padding-left: 10px/$tablet-portrait * 100%;
+
+//     }
+// }

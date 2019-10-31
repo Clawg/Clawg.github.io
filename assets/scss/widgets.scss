@@ -1,0 +1,162 @@
+      // Widgets
+            %widget {
+                @extend %round;
+                background-color: rgb(255,255,255);
+                background-color: rgba(255,255,255, 0.8); margin: 0 0 $baseLineHeight*2 0; padding: 0;
+            }
+
+            // The #smallSide variable detemines wheter the page has a narrower side column
+            // Padding for each widget is calculated based on the grid measurments
+            // colSize calculations are different for smaller devices as they only use 1 column
+
+            @mixin main-widget($smallSide: false) {
+                @extend %widget;
+
+                $colSize: $phone - ($phone-pad * 2);
+                padding: 0 $widget-pad/$colSize*100%;
+
+                @include respond-to(phone-landscape) {
+                    $colSize: $phone-landscape - ($phone-landscape-pad * 2);
+                    padding: 0 $widget-pad/$colSize*100%;
+                }
+
+                @include respond-to(smalltablet) {
+                    $colSize: $smalltablet - ($smalltablet-pad * 2);
+                    padding: 0 $widget-pad/$colSize*100%;
+                }
+
+                @include respond-to(tablet-portrait) {
+                    // One difference due to the gird padding being a different size to the gutters,
+                    // We need to calculate the difference ($gutterDifference) and subtract this when working out the colSize.
+                    @if $smallSide == true {
+                        $columns-used: $large-main-cols; // Take up 4 Columns
+                        //$gutterDifference: ($gutter-width - $grid-padding) * 2;
+                        $colSize: $columns-used*($column-width+$gutter-width);// - 8px;
+                        padding: 0 $widget-pad/($colSize - $gutter-width) * 100%;
+                    } @else {
+                        $columns-used: $main-cols; // Take up 4 Columns
+                        $colSize: $columns-used*($column-width+$gutter-width);// -  10px;
+                        z-index: $colSize;
+                        padding: 0 $widget-pad/($colSize - $gutter-width) * 100%;
+                    }
+                }
+
+                //@include respond-to(desktop) {
+                @include respond-wrapper-fallback(desktop, lt-ie9) {
+                    @if $smallSide == true {
+                        $columns-used:  $desktop-large-main-cols; // Take up 3 Columns
+                        $colSize: $columns-used*($desktop-column-width+$desktop-gutter-width)-$desktop-gutter-width;
+                        padding: 0 $widget-pad/$colSize * 100%;
+                    } @else {
+                        $columns-used: $desktop-main-cols; // Take up 3 Columns
+                        $colSize: $columns-used*($desktop-column-width+$desktop-gutter-width)-$desktop-gutter-width;
+                        padding: 0 $widget-pad/$colSize * 100%;
+                    }
+                }
+
+                @include respond-to(widescreen) {
+                    @if $smallSide == true {
+                        $columns-used:  $widescreen-large-main-cols; // Take up 2 Columns
+                        $colSize: $columns-used*($widescreen-column-width+$widescreen-gutter-width)-$widescreen-gutter-width;
+                        padding: 0 $widget-pad/$colSize * 100%;
+                    } @else {
+                        $columns-used:  $widescreen-main-cols; // Take up 2 Columns
+                        $colSize: $columns-used*($widescreen-column-width+$widescreen-gutter-width)-$widescreen-gutter-width;
+                        padding: 0 $widget-pad/$colSize * 100%;
+                    }
+                }
+
+            }
+
+            @mixin aside-widget($smallSide: false) {
+                @extend %widget;
+
+                @if $smallSide == true {
+                    $colSize: $phone - ($phone-pad * 2);
+                    padding: $baseLineHeight $widget-pad/$colSize*100%;
+                } @else {
+                    display:none;
+                }
+
+// .foo {
+//   margin: 0 auto;
+//   padding: 0 10px;
+
+//   @include respond-wrapper-fallback(desktop, lt-ie9) {
+//     min-width: 940px;
+//     max-width: 1220px;
+//     padding: 0 20px;
+//   }
+// }
+
+
+                @include respond-to(phone-landscape) {
+                    $colSize: $phone-landscape - ($phone-landscape-pad * 2);
+                    padding: $baseLineHeight $widget-pad/$colSize*100%;
+                }
+
+                @include respond-to(smalltablet) {
+                    $colSize: $smalltablet - ($smalltablet-pad * 2);
+                    padding: $baseLineHeight $widget-pad/$colSize*100%;
+                }
+
+               @include respond-to(tablet-portrait) {
+                    @if $smallSide == true {
+                        $columns-used: $large-aside-cols; // Take up 3 Columns
+                        $gutterDifference: ($gutter-width - $grid-padding) * 2;
+                        $colSize: $columns-used*($column-width+$gutter-width);// - 8px;
+                        padding: $baseLineHeight $widget-pad/($colSize - $gutter-width) * 100%;
+                    } @else {
+                        display: block;
+                        $columns-used: $aside-cols; // Take up 3 Columns
+                        $colSize: $columns-used*($column-width+$gutter-width);// - 8px;
+                        padding: $baseLineHeight $widget-pad/($colSize - $gutter-width) * 100%;
+                    }
+                }
+
+                @include respond-wrapper-fallback(desktop, lt-ie9) {
+                //@include respond-to(desktop) {
+                    @if $smallSide == true {
+                        $columns-used:  $desktop-large-aside-cols; // Take up 3 Columns
+                        $colSize: $columns-used*($desktop-column-width+$desktop-gutter-width)-$desktop-gutter-width;
+                        padding: $baseLineHeight $widget-pad/$colSize * 100%;
+                    } @else {
+                        $columns-used: $desktop-aside-cols; // Take up 4 Columns
+                        $colSize: $columns-used*($desktop-column-width+$desktop-gutter-width)-$desktop-gutter-width;
+                        padding: $baseLineHeight $widget-pad/$colSize * 100%;
+                        display: block;
+                    }
+                }
+                @include respond-to(widescreen) {
+
+                    @if $smallSide == true {
+                        $columns-used: $widescreen-large-aside-cols; // Take up 2 Columns
+                        $colSize: $columns-used*($widescreen-column-width+$widescreen-gutter-width)-$widescreen-gutter-width;
+                        display: block;
+                        padding: $baseLineHeight $widget-pad/$colSize * 100%;
+                    } @else {
+                        $columns-used: $widescreen-aside-cols;  // Take up 6 Columns
+                        $colSize: $columns-used*($widescreen-column-width+$widescreen-gutter-width)-$widescreen-gutter-width;
+                        padding: $baseLineHeight $widget-pad/$colSize * 100%;
+                    }
+                }
+
+                // .lt-ie9 {
+                //     display: block;
+                //     @if $smallSide == true {
+                //         $columns-used:  $desktop-large-aside-cols; // Take up 3 Columns
+                //         $colSize: $columns-used*($desktop-column-width+$desktop-gutter-width)-$desktop-gutter-width;
+                //         padding: $baseLineHeight $widget-pad/$colSize * 100%;
+                //     } @else {
+                //         $columns-used: $desktop-aside-cols; // Take up 4 Columns
+                //         $colSize: $columns-used*($desktop-column-width+$desktop-gutter-width)-$desktop-gutter-width;
+                //         padding: $baseLineHeight $widget-pad/$colSize * 100%;
+                //         display: block;
+                //     }
+                // }
+
+                .h2:first-child { margin-top: 0 }
+
+            }
+
+

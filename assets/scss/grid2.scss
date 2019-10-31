@@ -1,0 +1,194 @@
+// *****************************************************************************************
+
+    // Grid Scaffolding
+
+    // Grid is not applied to elements below 768px breakpoint
+    // Above 768 Susy Grids are used.
+
+
+// *****************************************************************************************
+
+// You're right. at-breakpoint is not meant to give you completely new
+// grid settings at every size - only to change the number of columns.
+// with-grid-settings is the right tool to use for changing the grid
+// settings, and the two of them work well together if you need to
+// change grid settings at different sizes.
+
+    // No sussy grid required as its just 1 column
+    // Just set the wrapper padding to insure equal widths at different sizes
+
+
+// Wrapper
+        .site-wrapper {
+            @extend %full-wrapper;
+            padding-top: 0;
+        }
+
+    // Silent class for wrapper
+        %full-wrapper {
+            padding:  0 10px/$phone*100%;
+            position: relative;
+            //background-color: red;
+            @include respond-to(phone-landscape) {
+                padding: 0 10px/$phone-landscape*100%;
+                //background-color: green;
+            }
+            @include respond-to(smalltablet) {
+                //background-color: blue;
+                padding: 0 10px/$smalltablet*100%;
+            }
+        }
+
+        // Start using Sussy Grid on the wrapper containers
+
+            //768px breakpoint - uses defulat grid settings of 7 cols
+                @include at-breakpoint($tablet-portrait) {
+
+                    %full-wrapper {
+                        //background-color: black;
+                        @include container($total-columns);
+                       // @include susy-grid-background;
+                    }
+                }
+
+            // 980px breakpoint
+                @include at-breakpoint($desktop) {
+
+                    @include with-grid-settings($desktop-total-columns,$desktop-column-width,$desktop-gutter-width,$desktop-grid-padding) {
+                        %full-wrapper {
+                            //background-color: magenta;
+                            @include container;
+                           // @include susy-grid-background;
+                        }
+                    }
+                }
+
+            // 1160 breakpoint
+                @include at-breakpoint($widescreen) {
+
+                    @include with-grid-settings($widescreen-total-columns,$widescreen-column-width,$widescreen-gutter-width,$widescreen-grid-padding) {
+                        %full-wrapper {
+                            //background-color: orange;
+                            @include container;
+                            border:solid 1px blue;
+                            //@include susy-grid-background;
+                        }
+                    }
+                }
+
+                //  IE wrapper, same as desktop, 960 grid
+                .lt-ie9 {
+                    @include with-grid-settings($desktop-total-columns,$desktop-column-width,$desktop-gutter-width,$desktop-grid-padding) {
+                        %full-wrapper {
+                             @include container;
+                        }
+                    }
+                }
+
+
+    // Use Sussy grid
+
+        // Site wrapper extend full-wrapper.
+        // Full wrapper, will set up a basic one column grid for everything below 768
+        // 768 and above will use susy grids
+
+        // @include respond-to(widescreen) {
+        // }
+
+
+
+
+         @include at-breakpoint($tablet-portrait) {
+                // CANT USE $TOTAL-COL AS ITS = TO 8 FOR SOME REASON
+                .main {
+                    @include span-columns($main-cols, 7);
+
+                }
+                .aside {
+                    @include span-columns($aside-cols omega, 7);
+                }
+                .main-large {
+                    @include span-columns($large-main-cols, 7);
+                }
+                .aside-small {
+                    @include span-columns($large-aside-cols omega, 7);
+                }
+            }
+
+//$media-layout 12 lt-ie9
+
+        // 980px breakpoing
+            @include at-breakpoint($desktop) {
+                @include with-grid-settings($desktop-total-columns,$desktop-column-width,$desktop-gutter-width,$desktop-grid-padding) {
+                        .site-wrapper { background: url(../img/fullcog-notext.png) 10px 23px no-repeat; background-size: 300px 300px}
+                        .main {
+                            @include span-columns($desktop-main-cols, $desktop-total-columns);
+                        }
+                        .aside {
+                            @include span-columns($desktop-aside-cols omega,  $desktop-total-columns);
+                        }
+                        .main-large {
+                            @include span-columns($desktop-large-main-cols,  $desktop-total-columns);
+                        }
+                        .aside-small {
+                            @include span-columns($desktop-large-aside-cols omega,  $desktop-total-columns);
+                        }
+
+                }
+            }
+
+        // 1160 breakpoint
+            @include at-breakpoint($widescreen) {
+                @include with-grid-settings($widescreen-total-columns,$widescreen-column-width,$widescreen-gutter-width,$widescreen-grid-padding) {
+                //@include border-box-sizing;
+                    .site-wrapper { background: url(../img/fullcog-notext.png) 0 50px no-repeat,
+                        url(../img/fullcog-notext.png) 376px -260px no-repeat;}
+
+
+                        .main {
+                            @include span-columns($widescreen-main-cols,  $widescreen-total-columns);
+                        }
+                        .aside {
+                            @include span-columns($widescreen-aside-cols omega, $widescreen-total-columns);
+                        }
+
+                        .main-large {
+                            @include span-columns($widescreen-large-main-cols, $widescreen-total-columns);
+                            //@include squish(1,1);
+                        }
+                        .aside-small {
+                            @include span-columns($widescreen-large-aside-cols omega, $widescreen-total-columns);
+                        }
+                        // Inner items are new inner Columns
+                            .article-list-widget {
+                                @include span-columns(3 alpha, $widescreen-total-columns/2);
+                            }
+                            .about-vcard-widget {
+                                @include span-columns(3 omega, $widescreen-total-columns/2);
+                            }
+                            // .sites-widget {
+                            //     @include span-columns(2 omega,2);
+                            // }
+                }
+            }
+
+            // IE Columns
+            .lt-ie9 {
+                $container-style:static;
+                @include with-grid-settings($desktop-total-columns,$desktop-column-width,$desktop-gutter-width,$desktop-grid-padding) {
+
+                    .main {
+                        @include span-columns($desktop-main-cols, $desktop-total-columns);
+                    }
+                    .aside {
+                        @include span-columns($desktop-aside-cols omega,  $desktop-total-columns);
+                    }
+                    .main-large {
+                        @include span-columns($desktop-large-main-cols,  $desktop-total-columns);
+                    }
+                    .aside-small {
+                        @include span-columns($desktop-large-aside-cols omega,  $desktop-total-columns);
+                    }
+                }
+
+            }

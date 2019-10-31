@@ -1,0 +1,98 @@
+   // Variables
+    // -------------------------
+        $bodycolor:             #888;
+
+        $mainColor:             rgb(160, 216, 239);
+
+
+        $grayDarkest:           #222;
+        $grayDarker:            #444;
+        $grayDark:              #7a7a7a;
+        $gray:                  #a4a4a4;
+        $grayLight:             #dbdbdb;
+        $grayLighter:           #e4e4e4;
+        $grayLightest:          #fafafa;
+
+
+    // Links
+    // -------------------------
+        $primaryLink: #578EAF;
+        $primaryLinkHover: darken($primaryLink, 10%);
+
+
+
+
+    // Font Size
+    // -------------------------
+        $fontSize-largest:      24;
+        $fontSize-large:        20;
+        $fontSize-default:      16;
+        $fontSize-small:        14;
+        $fontSize-smallest:     11;
+
+
+    // Line Height
+    // -------------------------
+
+        $baseLineHeight:        (20/$fontSize-default) * 1em;
+
+
+    // Spacing
+    // -------------------------
+        $defaultSpacing:        0.5em (10/320)*100%;
+
+
+  // Breakpoints
+        $phone:                 320px;
+        $phone-pad:             10px;
+        $phone-landscape:       480px;
+        $phone-landscape-pad:   10px;
+        $smalltablet:           600px;
+        $smalltablet-pad:       10px;
+        $tablet-portrait:       768px;
+        $tablet-portrait-pad:   18px;
+        $desktop:               980px;
+        $desktop-pad:           10px;
+        $widescreen:            1160px;
+        $widescreen-pad:        10px;
+
+        $widget-pad:            10px;
+
+ // Susy Grid Default Valiables
+        // $total-columns:             7;
+        // $column-width:              84px;
+        // $gutter-width:              24px;
+        // $grid-padding:              18px;
+        // $container-style:           fluid;
+
+        $total-columns:             7;
+        $column-width:              84px;
+        $gutter-width:              24px;
+        $grid-padding:              18px;
+        $container-style:           fluid;
+        $main-cols:                 4;
+        $aside-cols:                3;
+        $large-main-cols:           5;
+        $large-aside-cols:          2;
+
+
+        // Desktop grid reset
+        $desktop-total-columns:     12;
+        $desktop-column-width:      60px;
+        $desktop-gutter-width:      20px;
+        $desktop-grid-padding:      20px;
+        $desktop-main-cols:         8;
+        $desktop-aside-cols:        4;
+        $desktop-large-main-cols:   9;
+        $desktop-large-aside-cols:  3;
+
+
+        // WideScreen grid reset
+        $widescreen-total-columns:  12;
+        $widescreen-column-width:   75px;
+        $widescreen-gutter-width:   20px;
+        $widescreen-grid-padding:   20px;
+        $widescreen-main-cols:      6;
+        $widescreen-aside-cols:     6;
+        $widescreen-large-main-cols: 10;
+        $widescreen-large-aside-cols:2;

@@ -1,0 +1,71 @@
+/* Defaults and resets
+---------------------------------------------------------------------------------------------------------------*/
+
+
+
+        * { @include box-sizing(border-box) }
+        //body {max-width: $widescreen;}
+        a {color: $primaryLink; text-decoration:none}
+        a:hover { text-decoration: underline; color: $primaryLinkHover }
+        img,
+        object,
+        iframe {width: 100%; max-width: 100%;}
+
+
+        //ul { margin: 0 0 0 20px; padding:0 }
+        .phonelist {
+            dt { font-weight: bold }
+            dd { margin:0; padding: 0 }
+        }
+
+h2, .h2 { @include font-size(13); } // 21px
+h3, .h3 { @include font-size(11); } // 18px
+h4, .h4 { @include font-size(10); } // 16px
+
+
+
+body {
+    background: url(../img/fullcog-notext.png) -60px -107px no-repeat;
+    background-size: 300px 300px; color: $bodycolor;
+    font-family: Arial, Helvetica, sans-serif;
+    height: 100%;
+    margin: 0 auto;
+    position: relative;
+
+    max-width: $widescreen;
+
+    // @include respond-to(phone-landscape) {
+    // }
+    // @include respond-to(smalltablet) {
+    // }
+    //@include respond-to(tablet-portrait) {
+    @include respond-wrapper-fallback(tablet-portrait, lt-ie9) {
+        padding-top: 50px;
+        background: url(../img/fullcog-notext.png) -80px -90px no-repeat, url(../img/multiplecogs.png) 150% 550px no-repeat;
+        background-size: auto auto;
+    }
+    //@include respond-to(desktop) {
+    @include respond-wrapper-fallback(desktop, lt-ie9) {
+        background:
+                    none,
+                    url(../img/multiplecogs.png) 150% 550px no-repeat;
+        }
+    @include respond-to(widescreen) {
+        background: none,
+                    url(../img/multiplecogs.png) 100% 550px no-repeat;
+                    background-size: auto auto;
+
+    }
+
+}
+
+
+ // IE Body, seperate from the respond-wrapper as we neeed to remove the background image
+    .lt-ie9 {
+        body {
+            background-image: none;
+            // padding-top: 50px;
+            // background: url(../img/fullcog-notext.png) -80px -90px no-repeat, url(../img/multiplecogs.png) 150% 550px no-repeat;
+            // background-size: auto auto;
+        }
+    }
