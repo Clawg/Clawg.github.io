@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+
+<head>
+    	<meta charset="UTF-8" />
+	<title>Clawg</title>
+	<meta name="description" content="">
+	<meta name="keywords" content="" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="stylesheet" href="../assets/css/master.css">
+	<script src="../assets/js/libs/modernizr.js"></script>
+	<!-- 
+		<link href="../assets/css/screen.css" media="screen, projection" rel="stylesheet" type="text/css" />
+		<link href="../assets/css/print.css" media="print" rel="stylesheet" type="text/css" />
+	 -->  
+	 <!--[if IE]>
+    	<link href="../assets/css/ie.css" media="screen, projection" rel="stylesheet" type="text/css" />
+  	<![endif]-->
+<!-- <link href="/assets/css/screen.css" media="screen, projection" rel="stylesheet" type="text/css" />
+<link href="/assets/css/print.css" media="print" rel="stylesheet" type="text/css" />
+ -->  <!--[if IE]>
+      <link href="/assets/css/ie.css" media="screen, projection" rel="stylesheet" type="text/css" />
+  <![endif]-->
+</head>
+
+<body>
+
+    <!--Site wrapper -->
+    <div class="site-wrapper">
+
+
+
+        		<a href="#nav" class="btn btn-menu"><i class="icn menu">Menu</i></a>
+
+        <header role="banner" class="header">
+            <hgroup>
+                <h1><a href="../index.html"><span id="c">c</span><span id="l">l</span><span id="a">a</span><span id="w">w</span><span id="g">g</span> <span id="b">b</span><span id="l2">l</span><span id="o">o</span><span id="g2">g</span></a></h1>
+                <h2>The thoughts of Charlie Law. Front end Web Development and general ramblings</h2>
+            </hgroup>
+        </header>
+
+
+        <!-- Main content -->
+        <article role="main" class="main">
+
+            <section class="article">
+                <h1 class="h2">Positioning ad code at the end of the page</h1>
+                <p>Sites that need to generate ad revenue are often littered with ad scripts throughout the HTML.  If these ads break or take a while to download it can delay the time it takes your site to appear.  It would make more sense to serve the ads as the last item in the document, thus allowing all page content to load first.  After all the user has not came to your site to see your ads. </p>
+                <p>To do this I have devised a technique that uses a combination of JavaScript and absolute positioning to take the ads from the bottom of document and place them visually where you want within the page.</p>
+                <p>Below is a step-by-step guide to setting up a MPU ad.</p>
+                <p>Set the main site wrapper to position:relative within the CSS</p>
+                <p>Take you ad code and add it to the end of the HTML document, placing it in a div tag with an id</p>
+                <p>
+                    <code>
+                        <pre>
+&lt;!-- MPU Banner --&gt;<br>
+&lt;div id="mpu-content"&gt;<br>
+&lt;script type="text/javascript"&gt;&lt;!--<br>
+document.write('&lt;scr'+'ipt language="javascript1.1" src="http://adserver.adtech.de/<br>
+addyn|3.0|577|1671709|0|170|ADTECH;loc=100;target=_blank;key=key1+key2+<br>
+key3+key4;grp=[group];misc='+new Date().getTime()+'"&gt;&lt;/scri'+'pt&gt;');<br>
+//--&gt;<br>
+&lt;/script&gt;<br>
+&lt;noscript&gt;&lt;div&gt;&lt;a href="http://adserver.adtech.de/adlink|3.0|577|1671709|0|170|ADTECH;<br>
+loc=300;key=key1+key2+key3+key4;grp=[group]"&gt;&lt;img src="http://adserver.adtech.de/<br>
+adserv|3.0|577|1671709|0|170|ADTECH;loc=300;key=key1+key2+key3+key4;grp=[group]"<br>
+width="300" height="250" alt="" /&gt;&lt;/a&gt;&lt;/div&gt;&lt;/noscript&gt;<br>
+&lt;/div&gt;<br>
+&lt;!--/ MPU Banner --&gt;
+                    </pre>
+                    </code>
+                </p>
+                <p>Set up an empty container placing it within the document flow where you want the ad to appear. </p>
+                <p>
+                    <code>
+<pre>
+&lt;!-- MPU container --&gt;<br>
+&lt;div id="mpu"&gt;&lt;/div&gt;<br>
+&lt;!--/ MPU container --&gt;
+</pre>
+                    </code>
+                </p>
+                <p>Set the dimensions of the empty container to match the size of the ad you are inserting.  Generally you will know the dimensions of the ad being served, so set the container to this size in your CSS.  The ad will later be positioned into the container. </p>
+                <p>
+                    <code>#mpu {width:300px; height:250px}</code>
+                </p>
+                <p>Split the ad code and place the noscript part of the ad code into the empty container, this allows for the ad to be served in the appropriate place if their is no JavaScript.</p>
+                <p>
+                    <code>
+<pre>
+&lt;!-- MPU container --&gt;<br>
+&lt;div id="mpu"&gt;<br>
+&lt;noscript&gt;&lt;div&gt;&lt;a href="http://adserver.adtech.de/adlink|3.0|577|1671709|0|170|ADTECH;<br>
+loc=300;key=key1+key2+key3+key4;grp=[group]"&gt;&lt;img src="http://adserver.adtech.de/<br>
+adserv|3.0|577|1671709|0|170|ADTECH;loc=300;key=key1+key2+key3+key4;grp=[group]"<br>
+width="300" height="250" alt="" /&gt;&lt;/a&gt;&lt;/div&gt;&lt;/noscript&gt;<br>
+&lt;/div&gt;&lt;!--/ MPU container --&gt;
+</pre>
+                    </code>
+                </p>
+                <p>The banner will now be in two places, with the JS part sitting at the end of the page and noscript content in the page flow.</p>
+                <p>Now for the JavaScript magic.  I have used Jquery to position the ads, but this technique should be easily customised with JavaScript or any JS library.  </p>
+                <p>
+                    <code>
+<pre>
+var mpuContainer = $('#mpu').position();<br>
+var mpuContainerTop = mpuContainer.top;<br>
+$("#mpu-content").css({position:"absolute", top:mpuContainerTop, right:"10px", display: "block"})
+</pre>
+                    </code>
+                </p>
+                <p>What the code is doing here is:</p>
+                <ul class="list-vertical">
+                    <li>Getting the coordinates of the empty container</li>
+                    <li>Finding the top left position of this container and setting it to the variable mpuContainerTop</li>
+                    <li>Then using JQuery CSS function, positioning the banner absolutley to match the position of the empty container</li>
+                </ul>
+                <h2 class="h3">Page resizing</h2>
+                <p>A downside of positioning the ads with absolute positioning is once the user changes the font size, text will dissapear behind the ad.  To handle this I employed a script found on ALA called <a href="http://www.alistapart.com/articles/fontresizing">Text-Resize Detection</a>.  The script detects the default font size and then fires when a text resize occurs.  I have used this to reposition the ad at the new coordinates when text resizes. </p>
+                <h2 class="h3">More examples</h2>
+                <p>More examples can be found on my work site <a href="http://www.stv.tv/">www.stv.tv</a>, where the mpu and skyscrapper have been positioned using this technique.  If you dig a bit deeper on the code for this site you will notice the leaderboard does not use JavaScript.  I was able to use a different techniqe for positioning this as the leaderboard always sits at the top of the site with no content before it so I simply used absolute positioning.</p>
+                <footer  class="article-footer">
+                    <p>This entry was posted on <time datetime="2009-03-16" pubdate="">Monday, March 16th, 2009 at 11:05 pm</time>
+                </footer>
+            </section>
+
+        </article>
+        <!--/ Main content -->
+
+        <!-- Sidebar -->
+        <aside role="complementary" class="aside">
+            <div class="article-list-widget"></div>
+            <div class="about-vcard-widget"></div>
+        </aside><!--/ Sidebar -->
+
+
+
+
+    </div><!--/ Site wrapper -->
+	<nav id="nav" class="nav" role="navigation">
+		<ul>
+			<li><a href='../index.html'>Home</a></li><li>
+			<a href="../work/index.html">Work</a></li><li>
+			<a href="../article-list.html">Articles</a></li>
+		</ul>
+	</nav>
+
+        <script src="../assets/js/libs/jquery-1.8.3.min.js"></script>
+    <script src="../assets/js/libs/jquery.flexslider-min.js"></script>
+    <script src="../assets/js/helper.js"></script>
+    <script src="../assets/js/master.js"></script>
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-38346654-1']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+</body>
+</html">

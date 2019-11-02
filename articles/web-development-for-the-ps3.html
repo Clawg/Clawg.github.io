@@ -1,0 +1,156 @@
+
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+
+<head>
+    	<meta charset="UTF-8" />
+	<title>Clawg</title>
+	<meta name="description" content="">
+	<meta name="keywords" content="" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="stylesheet" href="../assets/css/master.css">
+	<script src="../assets/js/libs/modernizr.js"></script>
+	<!-- 
+		<link href="../assets/css/screen.css" media="screen, projection" rel="stylesheet" type="text/css" />
+		<link href="../assets/css/print.css" media="print" rel="stylesheet" type="text/css" />
+	 -->  
+	 <!--[if IE]>
+    	<link href="../assets/css/ie.css" media="screen, projection" rel="stylesheet" type="text/css" />
+  	<![endif]-->
+<!-- <link href="/assets/css/screen.css" media="screen, projection" rel="stylesheet" type="text/css" />
+<link href="/assets/css/print.css" media="print" rel="stylesheet" type="text/css" />
+ -->  <!--[if IE]>
+      <link href="/assets/css/ie.css" media="screen, projection" rel="stylesheet" type="text/css" />
+  <![endif]-->
+</head>
+
+<body>
+
+    <!--Site wrapper -->
+    <div class="site-wrapper">
+
+
+
+        		<a href="#nav" class="btn btn-menu"><i class="icn menu">Menu</i></a>
+
+        <header role="banner" class="header">
+            <hgroup>
+                <h1><a href="../index.html"><span id="c">c</span><span id="l">l</span><span id="a">a</span><span id="w">w</span><span id="g">g</span> <span id="b">b</span><span id="l2">l</span><span id="o">o</span><span id="g2">g</span></a></h1>
+                <h2>The thoughts of Charlie Law. Front end Web Development and general ramblings</h2>
+            </hgroup>
+        </header>
+
+
+          <!-- Main content -->
+        <article role="main" class="main">
+
+            <section class="article">
+              <h1 class="h2">Web development for the PS3</h1>
+              <p>The PS3 uses the NetFront browser.  Developing for this is like web development in the days when ie5.5 or ie6 were the dominant browsers.  Some things I have picked up that might help someone when developing for PS3:</p>
+              <ol>
+                <li>There seems to be a scrollbar that appears all of the time and the best way to get rid of this is to add the attribute scroll=”no” to the body tag</li>
+                <li>The html star hack works for targeting the browser (* html)</li>
+                <li>JavaScript events are set up with attachEvent and removed with detachEvent.  So if you want you events to work cross browser I suggest using something like <a href="/web/20110901114334/http://ejohn.org/projects/flexible-javascript-events/">John Resigs cross browser addEvent function</a></li>
+                <li>If you want to use a JavaScript library I found that <a href="/web/20110901114334/http://www.bbc.co.uk/glow/">BBC glow</a> works well.  The JQuery ready function would not fire, admittedly I did not spend much time trying to get to the bottom of this but I have found Glow to offer everything I required.</li>
+                <li> Absolutely positioned elements dont seem to receive focus when you tab with the dpad</li>
+                <li>If you want to align you site vertically in the middle of the screen then you will need JavaScript.  I took the route of hiding the site, positioning it and then showing it as this prevents an <a href="/web/20110901114334/http://www.bluerobot.com/web/css/fouc.asp/">FOUC</a></li>
+                <li>I worked with a fixed width and height but there is scope to make your site fluid.  However remember that users can be viewing you site on 52inch TV’s so you will probably need hi res images which can be bandwidth hungry to download</li>
+                <li>Sony told a work colleague of mine that playstation owners tend to take a while to update so build and test for a the browser version that is a year old.</li>
+                <li>The browser cache can be quite aggressive and I often found that even when I cleared the cache in the setting the HTML would not change.  The best way to sort this is to attach a query string to the URL</li>
+                <li>CSS sprites and transparent pngs work fine</li>
+                <li>To deal with different screen sizes you will need to adapt the layout.  I have worked on the basis of everything less than 720 gets the small verion of the site and everything above it gets the larger version.  The small version is 790*440 and the large version is 1195*665.  To tackle each layout seperatley I use a small bit of JavaScript that writes an additional classname into the head when the large screen verison is being used e.g.
+<pre><code>
+var screenHeight = document.documentElement.clientHeight;
+var screenWidth = document.documentElement.clientWidth;
+if (screenHeight &gt;= 720 &amp;&amp; screenWidth &gt; 1195) {
+    var a = document.getElementsByTagName('html')[0]; var x = a.className; var y = x.substr(3); a.className = y + ' largescreen';
+} else {
+    var a = document.getElementsByTagName('html')[0]; var x = a.className; var y = x.substr(3); a.className = y;
+} </code></pre>
+</li>
+              <li>The following function maps the dpad events from the controller.
+<pre><code>
+function keyDown(e){
+  var code;
+  if (!e) var e = window.event;
+  if (e.keyCode) code = e.keyCode;
+  else if (e.which) code = e.which;
+  var character = String.fromCharCode(code);
+  switch(character){
+  case "%":
+    mapped_char = 'D-pad Left';
+    break;
+  case "'":
+    mapped_char = 'D-pad Right';
+    break;
+  case "&amp;":
+    mapped_char = 'D-pad Up';
+    break;
+  case "(":
+    mapped_char = 'D-pad Down';
+    break;
+  default:
+    mapped_char = character
+}
+  logger('EVENT: keydown - character was ' + mapped_char);
+} </code></pre>
+                </li>
+                <li>Not so much a PS3 specific tip but a very useful one when debugging.  PS3 has no debug console but the following function really helped me out when trying to get to the bottom of certain bugs:
+                <pre><code>
+                function logger(log){
+                  var el = document.getElementById('console');
+                  var current_log = el.innerHTML;
+                  var new_log = current_log + log + '&lt;br /&gt;';
+                  el.innerHTML = new_log;
+                }   </code></pre>
+                </li>
+              </ol>
+              <footer class="article-footer">
+                  <p>This entry was posted on <time datetime="2011-06-18" pubdate="">Saturday, June 18th, 2011 at 9:23 pm</time></p>
+              </footer>
+              </section>
+
+
+        </article>
+        <!--/ Main content -->
+
+        <!-- Sidebar -->
+        <aside role="complementary" class="aside">
+            <div class="article-list-widget"></div>
+            <div class="about-vcard-widget"></div>
+        </aside><!--/ Sidebar -->
+
+
+
+
+    </div><!--/ Site wrapper -->
+	<nav id="nav" class="nav" role="navigation">
+		<ul>
+			<li><a href='../index.html'>Home</a></li><li>
+			<a href="../work/index.html">Work</a></li><li>
+			<a href="../article-list.html">Articles</a></li>
+		</ul>
+	</nav>
+
+        <script src="../assets/js/libs/jquery-1.8.3.min.js"></script>
+    <script src="../assets/js/libs/jquery.flexslider-min.js"></script>
+    <script src="../assets/js/helper.js"></script>
+    <script src="../assets/js/master.js"></script>
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-38346654-1']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+</body>
+</html">

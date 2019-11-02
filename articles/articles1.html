@@ -1,0 +1,209 @@
+<P>Like a Phoneix from the flames the Clawg Blog has been resurected.  Formely on clawg.co.uk I forgot to renew my hosting due to me being in the middle of immigrating to New Zealand.  Well I made it here and thanks to the <a href="http://web.archive.org/">wayback machine</a> I have managed to salvage most of my old content</p>
+<p>I have been rebuilding this blog, mostly based trying out new techniques that I would like to start adding to my workflow at my job with the New Zealand Post.  So what is new: </p>
+
+<h2 class="h3">SASS</h2>
+<p>I have moved the CSS to be preprocessed with SASS.  I have used LESS on several projects but SASS intrigured me as its feels that there is a stronger community behind it than LESS.</p>
+<p>I must admit the move was a good thing, I fell SASS is more powerful than LESS, the features like silent classes, and some of the breakpoint handling and of cousre Compass make this a real winner for me.</p>
+<p>I've seen the SASS v LESS debate similar to the framework wars which JQuery has won, and I am backing SASS for this one.</p>
+<p>The use of SAAS or LESS really help with responsive design.  They make the maths involved for setting column widths and gutters much easier and changing values is really simple.</p>
+
+<h3 class="h3"><del>OO CSS</del>OO SCSS</h3>
+<p>This is one of the things I love about SASS.  You can use the @extend mixin to add presentational values without messing with the markup and keeping the classnames semantic</p>
+<p><a href="http://ianstormtaylor.com/oocss-plus-sass-is-the-best-way-to-css/">This article</a> explain it really well</p>
+
+<h2 class="h3">Mobile First</h2>
+<p>Whilst the old site was responsive it was never built mobile first and you could tell, the older mobile version was a bit half arsed, whereas the newer version takes into consideration several breakpoints and conditional loading of content (sidebars).</p>
+
+<h2 class="h3">New section</h2>
+<p>I've added a work section that showcases some of the projects I have been working on.</p>
+
+<h2 class="h3">CSS3</h2>
+<p>More CSS3 fun with the use of nth-child(2)</p>
+
+<h2 class="h3">Using Normalise</h2>
+<p>instead of using a CSS reset I gave Normalise a shot.  The jury is still out on this one for me,
+I find that I end up resetting more stuff, but I like the text size and line spacing you get out the box.</p>
+
+
+<h2 class="h3">Previous updates</h2>
+<p>This adds to some of the features I mentioned in a previous post:</p>
+
+
+
+
+<ul>
+    <li>Made use of CSS3 sudo selctor :last-child</li>
+    <li>Added trasparency to the content areas with CSS3 rgba</li>
+    <li>Drop shadows with CSS3</li>
+    <li>No more DD roundies for non ie users. Round corners are now handled with CSS3 border-radius</li>
+    <li>Pages now validate, it took a while to disect all the crap that was in wordpress but I got there</li>
+    <li>I added some new fonts. I started experimenting with typekit but after coming across the issue related to the flash of unstyled text I decided to simply use @font-face instead.</li>
+    <li>text-shadow has been added to some headers</li>
+    <li>Moved a lot of unnecessay markup and made some of the existing markup more semantic. There is still a few bits to go on this one.</li>
+    <li>Moved the dependancy of JavaScript for the twitter update which now uses PHP</li>
+    <li>Multiple backgroud images</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>High level figures for Google page weighting</h2>
+<div id="postdate">January 29th, 2009</div>
+<p>Read this document about <a href="/web/20100329102420/http://www.seomoz.org/article/search-ranking-factors">factors that contribute to your google ranking</a>, its a very interesting piece and gets right down to the nitty grity.&nbsp; It reminded me of a couple of figures that have been pitched to myself whilst managing a relationship with a well know SEO company.&nbsp;&nbsp; The figures I am sharing are not as detailed as the ones provided by SEOmoz, however I think they have their usefulness when talking to the suits about why SEO is important and what as developers we need to do.</p>
+<ul>
+    <li>50% inbound links</li>
+    <li>35% content</li>
+    <li>10% ease of accessing content</li>
+    <li>5% page history.</li>
+</ul>
+
+
+
+
+
+
+
+<article role="main">
+
+
+<section>
+<h1>Web development for the PS3</h1>
+<p>The PS3 uses the NetFront browser.  Developing for this is like web development in the days when ie5.5 or ie6 were the dominant browsers.  Some things I have picked up that might help someone when developing for PS3:</p>
+<ol>
+<li>There seems to be a scrollbar that appears all of the time and the best way to get rid of this is to add the attribute scroll=”no” to the body tag</li>
+<li>The html star hack works for targeting the browser (* html)</li>
+<li>JavaScript events are set up with attachEvent and removed with detachEvent.  So if you want you events to work cross browser I suggest using something like <a href="/web/20110901114334/http://ejohn.org/projects/flexible-javascript-events/">John Resigs cross browser addEvent function</a></li>
+<li>If you want to use a JavaScript library I found that <a href="/web/20110901114334/http://www.bbc.co.uk/glow/">BBC glow</a> works well.  The JQuery ready function would not fire, admittedly I did not spend much time trying to get to the bottom of this but I have found Glow to offer everything I required.</li>
+<li> Absolutely positioned elements dont seem to receive focus when you tab with the dpad</li>
+<li>If you want to align you site vertically in the middle of the screen then you will need JavaScript.  I took the route of hiding the site, positioning it and then showing it as this prevents an <a href="/web/20110901114334/http://www.bluerobot.com/web/css/fouc.asp/">FOUC</a></li>
+<li>I worked with a fixed width and height but there is scope to make your site fluid.  However remember that users can be viewing you site on 52inch TV’s so you will probably need hi res images which can be bandwidth hungry to download</li>
+<li>Sony told a work colleague of mine that playstation owners tend to take a while to update so build and test for a the browser version that is a year old.</li>
+<li>The browser cache can be quite aggressive and I often found that even when I cleared the cache in the setting the HTML would not change.  The best way to sort this is to attach a query string to the URL</li>
+<li>CSS sprites and transparent pngs work fine</li>
+<li>To deal with different screen sizes you will need to adapt the layout.  I have worked on the basis of everything less than 720 gets the small verion of the site and everything above it gets the larger version.  The small version is 790*440 and the large version is 1195*665.  To tackle each layout seperatley I use a small bit of JavaScript that writes an additional classname into the head when the large screen verison is being used e.g.
+<pre><code>
+var screenHeight = document.documentElement.clientHeight;
+var screenWidth = document.documentElement.clientWidth;
+if (screenHeight &gt;= 720 &amp;&amp; screenWidth &gt; 1195) {
+    var a = document.getElementsByTagName('html')[0]; var x = a.className; var y = x.substr(3); a.className = y + ' largescreen';
+} else {
+    var a = document.getElementsByTagName('html')[0]; var x = a.className; var y = x.substr(3); a.className = y;
+} </code></pre>
+</li>
+<li>The following function maps the dpad events from the controller.
+<pre><code>
+function keyDown(e){
+  var code;
+  if (!e) var e = window.event;
+  if (e.keyCode) code = e.keyCode;
+  else if (e.which) code = e.which;
+  var character = String.fromCharCode(code);
+  switch(character){
+  case "%":
+    mapped_char = 'D-pad Left';
+    break;
+  case "'":
+    mapped_char = 'D-pad Right';
+    break;
+  case "&amp;":
+    mapped_char = 'D-pad Up';
+    break;
+  case "(":
+    mapped_char = 'D-pad Down';
+    break;
+  default:
+    mapped_char = character
+}
+  logger('EVENT: keydown - character was ' + mapped_char);
+} </code></pre>
+</li>
+<li>Not so much a PS3 specific tip but a very useful one when debugging.  PS3 has no debug console but the following function really helped me out when trying to get to the bottom of certain bugs:
+<pre><code>
+function logger(log){
+  var el = document.getElementById('console');
+  var current_log = el.innerHTML;
+  var new_log = current_log + log + '&lt;br /&gt;';
+  el.innerHTML = new_log;
+}   </code></pre>
+</li>
+</ol>
+<footer class="article-footer">
+    <p>This entry was posted on <time datetime="2011-06-18" pubdate="">Saturday, June 18th, 2011 at 9:23 pm</time></p>
+</footer>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2 class="head">Moving on</h2>
+<div id="postdate">June 21st, 2008</div>
+<p>Its been over a year since I last posted anything on my blog or even updated the static pages of this site which were meant to be my portfolio. &nbsp;But like many of my supposed great ideas, this one has fell flat on its ass. &nbsp;&nbsp;I guess I feel I should only blog when I have got something decent to talk about which kind of worries me, do I only have one decent thing to say per year? Answers on a postcard.</p>
+<p>So what have I done in the past year. &nbsp;&lt;summary&gt;@media ajax, @media 2008, learned jquery, started playing golf again,&nbsp;rekindled&nbsp;friendships with old college buddies, seen my team play in a european final, been to Barcelona, drank loads of WooWoos (my new and&nbsp;favorite&nbsp;drink)&lt;/summary&gt;</p>
+<p>Anyway onto the reason behind this creative burst. &nbsp;I am off to pastures new in my career, &nbsp;leaving Tesco Personal Finance in 2 weeks time for the position of senior web developer at STV. &nbsp;I must admit I am disappointed to be leaving TPF as the people I work with are great and the job can be very challenging, however the opportunity my new role presents me is very exciting and looks like theirs is a lot to get my teeth into. &nbsp;I am really looking forward to the challenges ahead, learning loads of new stuff and the extra time in bed each morning.</p>
+<p>See you next year!&nbsp;</p>
+
+
+
+
+
+
+
+
+
+<!-- Post tile and date -->
+                <h2 class="head">Conference season</h2>
+                <div id="postdate">May 28th, 2007</div>
+
+<p>Whats that they say about 2 buses coming at once!</p>
+<p>It’s Web Standards conference season again and a time when my own faith in the web development profession is reinstalled just when its taking a post Winter dip. This is the time of year when loads of new techniques are brought to my attention and you get to meet a load of Geeks who enjoy the same things you do. I always leave these conferences thinking “Man I love what I do”</p>
+<p>My yearly highlight is a trip to London for @Media in June, its a brilliant couple of days with plenty of interesting talks and lots of boozing afterwards. I have attended the previous 2 years @Media’s and I thought <a href="/web/20091103152110/http://atmedia2005.co.uk/">@Media 2005 </a>was better than <a href="/web/20091103152110/http://www.vivabit.com/atmedia2006/">@Media 2006</a> because it was more intimate and I like to see the white of the speakers eyes. 2006 was huge and had 2 streams to choose from which always leaves me with some last minute decision making.</p>
+<p>The most recent conference I attended was <a href="/web/20091103152110/http://thehighlandfling.com/2007/">The Highland Fling</a>, it reminded me of @Media 2005, very intimate and had some excellent speakers. I am also slightly biased as the conference was arranged by my friend and former colleague <a href="/web/20091103152110/http://www.azcazandco.com/">Alan White</a> who is getting his just rewards for some hard work (and hard drinking) over the last few years. <a href="/web/20091103152110/http://www.vivabit.com/atmedia2007/">@Media 2007</a> will have a lot to live up to.</p>
+<p>Here the way I see my @media day panning out, though to be honest this will likely change on the day:</p>
+<h2>@media 2007 day 1</h2>
+<ul>
+<li>Jesse James Garrett: Beyond Ajax</li>
+<li>Molly E. Holzschlag: The Broken World: Solving the Browser Problem Once and For All</li>
+<li>Nate Koechle: High Performance Web Pages</li>
+<li>Richard Ishida: Designing for International Users: Practical Tips</li>
+<li>Dan Webb: The Mysteries Of JavaScript-Fu</li>
+<li>Joe Clark: When Web Accessibility Is Not Your Problem</li>
+</ul>
+<h2>@media 2007 day 2</h2>
+<ul>
+<li>Jon Hicks: How to be a Creative Sponge</li>
+<li>Jeremy Keith: Bulletproof Ajax</li>
+<li>Shawn Lawton Henry: Advancing Web Accessibility</li>
+<li>Tantek Çelik: Microformats, Building Blocks, and You</li>
+<li>Hot Topics Panel</li>
+</ul>
+
+
+
+
+
+
+
+
+
+<!-- Post tile and date -->
+<h2 class="head">First cut is the deepest</h2>
+<div id="postdate">May 28th, 2007</div>
+<p>I have finally got around to creating this site. It has been a long and drawn out process with 3 or 4 redesigns,&nbsp; I finally decided to bite the bullet and get something out there. I could waste my&nbsp;life away changing my mind.&nbsp;&nbsp; There are loads of wee tweaks I still need to do but it’s all a matter of time and if I wait until I have the site exactly as I want it then I will be time to redesign again.&nbsp; God I starting writing this post about 2 months ago so if that anything to go by expect the next post at the end of July.</p>
+<p>As a Web developer I feel it is important to have my hand in many pies&nbsp;so blogging is something I should definitely be doing.  I have taken the route of combining my blog with a site that I intend to develop for drumming up some business so&nbsp; I will need to watch this closely and see if that’s a good move or not.</p>

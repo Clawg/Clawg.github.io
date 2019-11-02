@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+
+<head>
+    	<meta charset="UTF-8" />
+	<title>Clawg</title>
+	<meta name="description" content="">
+	<meta name="keywords" content="" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="stylesheet" href="../assets/css/master.css">
+	<script src="../assets/js/libs/modernizr.js"></script>
+	<!-- 
+		<link href="../assets/css/screen.css" media="screen, projection" rel="stylesheet" type="text/css" />
+		<link href="../assets/css/print.css" media="print" rel="stylesheet" type="text/css" />
+	 -->  
+	 <!--[if IE]>
+    	<link href="../assets/css/ie.css" media="screen, projection" rel="stylesheet" type="text/css" />
+  	<![endif]-->
+<!-- <link href="/assets/css/screen.css" media="screen, projection" rel="stylesheet" type="text/css" />
+<link href="/assets/css/print.css" media="print" rel="stylesheet" type="text/css" />
+ -->  <!--[if IE]>
+      <link href="/assets/css/ie.css" media="screen, projection" rel="stylesheet" type="text/css" />
+  <![endif]-->
+</head>
+
+<body>
+
+    <!--Site wrapper -->
+    <div class="site-wrapper">
+
+
+
+        		<a href="#nav" class="btn btn-menu"><i class="icn menu">Menu</i></a>
+
+        <header role="banner" class="header">
+            <hgroup>
+                <h1><a href="../index.html"><span id="c">c</span><span id="l">l</span><span id="a">a</span><span id="w">w</span><span id="g">g</span> <span id="b">b</span><span id="l2">l</span><span id="o">o</span><span id="g2">g</span></a></h1>
+                <h2>The thoughts of Charlie Law. Front end Web Development and general ramblings</h2>
+            </hgroup>
+        </header>
+
+        <!-- Main content -->
+        <article role="main" class="main">
+
+            <section class="article">
+                <h1 class="h2">Right aligned CSS sprites</h1>
+                <p>The benefits of CSS sprites are well document.</p>
+                <ul class="bullet">
+                <li>Improved web site perfomance due to a reduced in http requests</li>
+                <li>Simple rollovers without JavaScript</li>
+                <li>Easy management of multiple images within one file.</li>
+                </ul>
+                <p>Due to these benefits I find myself keen to use CSS sprites whenever I can.  However, until recently there has been one situation where I found myself unable to add particular images to CSS sprites. Right aligned images.</p>
+                <p>When positioning a background image you set the top and left positions like so:</p>
+                <p><code>background-position:10px 30px </code></p>
+                <p>The first value represents the horizontal position and the second represents the vertical position.  This example would move a background image 10px from the left and 30px from the top.   You can use other units like relative numbers (%, em), or the length keyword combinations top, bottom, left, center, right.</p>
+                <p>Positioning images within a CSS Sprite you use the units (pixels or percentage) with a negative value </p>
+                <p><code>background-position: -10px -30px </code></p>
+                <p>I like to think of this as clipping an image, you are basically saying cut 10px from the left of my image and 30px from the top and show the rest of the image from that point in the the top left position.  As you are using the positioning coordinates to “clip” the image you are unable to move the image position like you can with positive values.   Here’s an <a href="http://www.clawg.co.uk/examples/right-aligned-css-sprites-example-1.html">example page of left aligned sprites</a>.</p>
+                <p>This works for left aligned images however if you want the image to be right aligned things are a bit different.    Although the W3C state you can’t do this, it is possible to combine units with lengths. You can use the keyword or percentage to get the right hand side of the image and pixels to get the top coordinate. e.g. </p>
+                <p><code>background-position: 100% -10px</code><br>
+                or </p>
+                <p><code>background-position: right -10px </code></p>
+                <p>I have x-browser tested this technique in IE 5.5 upwards, FF 2 &amp; 3, Opera and Safari on Mac and Windows and it works fine and the CSS still validates too.  You can see the <a href="http://www.clawg.co.uk/examples/right-aligned-css-sprites-example-2.html">right aligned sprites on this demo page</a>.</p>
+                <p>When the sprite contains multiple images positioned horizontally then the images to the left may get shown.  What I tend to do is set up a seperate sprite for all images that are right aligned, though if you want to keep everything in one place you could just place all sprites vertically or make the sprite extra large and right align the appropriate images within the sprite with plenty of white space to the left.</p>
+
+                 <footer  class="article-footer">
+                    <p>This entry was posted on <time datetime="2009-03-09" pubdate="">Monday, March 9th, 2009 at 10:44 pm</time></p>
+                </footer>
+            </section>
+
+
+        </article>
+        <!--/ Main content -->
+
+        <!-- Sidebar -->
+        <aside role="complementary" class="aside">
+            <div class="article-list-widget"></div>
+            <div class="about-vcard-widget"></div>
+        </aside><!--/ Sidebar -->
+
+
+
+
+    </div><!--/ Site wrapper -->
+	<nav id="nav" class="nav" role="navigation">
+		<ul>
+			<li><a href='../index.html'>Home</a></li><li>
+			<a href="../work/index.html">Work</a></li><li>
+			<a href="../article-list.html">Articles</a></li>
+		</ul>
+	</nav>
+
+        <script src="../assets/js/libs/jquery-1.8.3.min.js"></script>
+    <script src="../assets/js/libs/jquery.flexslider-min.js"></script>
+    <script src="../assets/js/helper.js"></script>
+    <script src="../assets/js/master.js"></script>
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-38346654-1']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+</body>
+</html">
